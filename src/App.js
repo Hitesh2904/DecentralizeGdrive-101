@@ -48,22 +48,35 @@ function App() {
     provider && loadProvider();
   }, []);
 
-  return <div className="App">
-    <h1 style={{color:"white"}}>DGdrive 101</h1>
-    <div class = "bg"></div>
-    <div class = "bg bg2"></div>
-    <div class = "bg bg3"></div>
+  return (
+    <>
+      {!modalOpen && (
+        <button className="share" onClick={() => setModalOpen(true)}>
+          Share
+        </button>
+      )}
+      {modalOpen && (
+        <Modal setModalOpen={setModalOpen} contract={contract}></Modal>
+      )}
 
-    <p style={{color:"white"}}>Account : {account ? account:"Not connected"}</p>
+      <div className="App">
+        <h1 style={{ color: "white" }}>DGdrive 101</h1>
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
 
-    <FileUpload 
-    account={account}
-    provider = {provider} 
-    contract = {contract}>
-    </FileUpload>
-
-    <Display contract = {contract} account={account}></Display>
-  </div>;
+        <p style={{ color: "white" }}>
+          Account : {account ? account : "Not connected"}
+        </p>
+        <FileUpload
+          account={account}
+          provider={provider}
+          contract={contract}
+        ></FileUpload>
+        <Display contract={contract} account={account}></Display>
+      </div>
+    </>
+  );
 }
 
 export default App;

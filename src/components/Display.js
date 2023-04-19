@@ -8,14 +8,20 @@ const Display=({contract,account})=>
         let dataArray;
         const Otheraddress = document.querySelector(".address").value;
 
-        if(Otheraddress)
+        try{
+            if(Otheraddress)
+            {
+                dataArray = await contract.display(Otheraddress);
+                console.log(dataArray)
+            }
+            else{
+                dataArray=await contract.display(account)
+            }
+        } catch(e)
         {
-            dataArray = await contract.display(Otheraddress);
-            console.log(dataArray)
+            alert("You don't have access");
         }
-        else{
-            dataArray=await contract.display(account)
-        }
+        
         const isEmpty = Object.keys(dataArray).length===0;
 
         if(!isEmpty)
