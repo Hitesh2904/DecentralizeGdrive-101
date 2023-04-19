@@ -24,7 +24,18 @@ const Display=({contract,account})=>
             const str_array = str.split(",");
             // console.log(str);
             // console.log(str_array);
-            
+            const images = str_array.map((item,i) =>{
+                return(
+                    <a href= {item} key ={i} target = "blank">
+                        <img key={i} src={`https://gateway.pinata.cloud/ipfs/${item.substring(34)}`} 
+
+                        alt="new"
+                        className="image-list"
+                        ></img>
+                    </a> 
+                    );
+            });
+            setData(images);
         }
         else{
             alert("No image to Display");
@@ -32,7 +43,7 @@ const Display=({contract,account})=>
     };
     return(
     <>
-    <div className="image-list">Image Display</div>
+    <div className="image-list">{data}</div>
     <input type= "text" placeholder="Enter Address" className="address"></input>
     <button className="center button"  onClick={getdata}>Get Data</button>
     </>
